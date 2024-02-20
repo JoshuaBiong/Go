@@ -8,24 +8,23 @@ import (
 
 // FUNCTION OF THE ROUTES
 
-// formHandler Functions
+// ======================== formHandler Functions
 
 func formHandler(w http.ResponseWriter, r *http.Request) {
 	if err := r.ParseForm(); err != nil {
 		fmt.Fprintf(w, "ParseForm() err: %v", err)
 		return
 	}
-	fmt.Fprintf(w, "POST request succcessful")
+	fmt.Fprintf(w, "POST request succcessful\n")
 	// getting the value from the form  and put it in the variable
 	name := r.FormValue("name")
 	address := r.FormValue("address")
-
 	// printing out the value of the form "%s It is used to format string values"
 	fmt.Fprintf(w, "Name = %s\n", name)
 	fmt.Fprintf(w, "Address = %s\n", address)
 }
 
-// hellohandler Function
+// =================== hellohandler Function
 func helloHandler(w http.ResponseWriter, r *http.Request) {
 	// if url is in the wrong path 404 server will be displayed
 	if r.URL.Path != "/hello" {
@@ -41,8 +40,8 @@ func helloHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	// getting the
-	fileServer := http.FileServer(http.Dir("/static"))
+	// getting the index.html
+	fileServer := http.FileServer(http.Dir("./static"))
 
 	//routes for the server to go
 	http.Handle("/", fileServer)
